@@ -1,8 +1,5 @@
 package com.tektonlabs.percentadder.model;
 
-import lombok.Data;
-
-@Data
 public class CalculationRequest {
     private Double number1;
     private Double number2;
