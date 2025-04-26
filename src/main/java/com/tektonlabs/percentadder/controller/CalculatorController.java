@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 @RestController
 @RequestMapping("v1/api/percentage")
 public class CalculatorController {
@@ -30,9 +31,9 @@ public class CalculatorController {
     @Operation(summary = "Obtiene el historial de llamadas de cálculo",
             description = "Este endpoint permite obtener el historial de las llamadas al endpoint de suma, con soporte para paginación.")
     @ApiResponse(responseCode = "200", description = "Lista de historial de cálculos")
-
     @GetMapping("/history")
-    public ResponseEntity<Page<CalculationHistoryDTO>> getCalculationHistory(Pageable pageable) {
+    public ResponseEntity<org.springframework.data.domain.Page<CalculationHistoryDTO>> getCalculationHistory(
+            @Parameter(description = "Información de paginación (page number, page size, sort)") Pageable pageable) {
         Page<CalculationHistoryDTO> historyPage = calculationService.getCalculationHistory(pageable);
         return ResponseEntity.ok(historyPage);
     }

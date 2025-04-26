@@ -18,7 +18,7 @@ Esta aplicación Spring Boot proporciona una API REST para sumar dos números y 
 
 2.  **Construir la aplicación Spring Boot:**
     ```bash
-    ./mvnw clean package
+    ./mvnw clean compile
     ```
     (Si no tienes Maven instalado, puedes usar tu IDE para construir el proyecto y generar el archivo JAR en la carpeta `target`).
 

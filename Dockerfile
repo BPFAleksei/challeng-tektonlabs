@@ -9,7 +9,6 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-# Puerto que expone tu aplicación (ajústalo si usas otro)
 EXPOSE 8080
 
 # Comando para ejecutar la app

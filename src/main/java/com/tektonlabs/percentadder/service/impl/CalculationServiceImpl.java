@@ -52,7 +52,7 @@ public class CalculationServiceImpl implements CalculationService {
         );
     }
     @Async
-    public void recordCalculation(String endpoint, Map<String, String> parameters, String response, String error) {
+    private void recordCalculation(String endpoint, Map<String, String> parameters, String response, String error) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         calculationHistoryRepository.save(new CalculationHistory(LocalDateTime.now(), endpoint, parameters, response, error));
     }
