@@ -23,7 +23,7 @@ public class CalculatorController {
 
     @Operation(summary = "Suma dos números y aplica un porcentaje dinámico",
             description = "Este endpoint recibe dos números, los suma y aplica un porcentaje obtenido de un servicio externo (o caché).")
-    @GetMapping("/calculate")
+    @PostMapping("/calculate")
         public ResponseEntity<Double> calculate(@RequestBody CalculationRequest request) {
         double result = calculationService.sumAndApplyPercentage(request);
         return new ResponseEntity<>(result, HttpStatus.OK);
