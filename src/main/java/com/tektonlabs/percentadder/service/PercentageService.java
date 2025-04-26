@@ -3,6 +3,7 @@ package com.tektonlabs.percentadder.service;
 import com.tektonlabs.percentadder.dto.PercentageResponseDTO;
 import com.tektonlabs.percentadder.exception.ExternalServiceUnavailableException;
 import com.tektonlabs.percentadder.exception.PercentageRetrievalException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Slf4j
 @CacheConfig(cacheNames = "percentage")
 public class PercentageService {
 
@@ -34,7 +36,7 @@ public class PercentageService {
                 lastRetrievedPercentage = response.percentage();
                 return lastRetrievedPercentage;
             } else {
-                System.out.println("Failed to retrieve percentage from external service: Response was null or percentage missing.");
+                log.info("Failed to retrieve percentage from external service: Response was null or percentage missing.");
                 if (lastRetrievedPercentage != null) {
                     return lastRetrievedPercentage;
                 } else {
@@ -42,7 +44,7 @@ public class PercentageService {
                 }
             }
         } catch (RestClientException e) {
-            // logger.error("Error calling external percentage service: {}", e.getMessage());
+            log.error("Error calling external percentage service: {}", e.getMessage());
             if (lastRetrievedPercentage != null) {
                 return lastRetrievedPercentage;
             } else {
@@ -54,6 +56,6 @@ public class PercentageService {
     @Scheduled(fixedRate = 30 * 60 * 1000) // Evict cache every 30 minutes
     @CacheEvict
     public void clearPercentageCache() {
-        System.out.println("Clearing percentage cache.");
+        log.info("Clearing percentage cache.");
     }
 }
