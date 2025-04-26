@@ -4,6 +4,7 @@ import com.tektonlabs.percentadder.dto.CalculationHistoryDTO;
 import com.tektonlabs.percentadder.model.CalculationRequest;
 import com.tektonlabs.percentadder.service.CalculationService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,10 @@ public class CalculatorController {
 
     @Operation(summary = "Obtiene el historial de llamadas de cálculo",
             description = "Este endpoint permite obtener el historial de las llamadas al endpoint de suma, con soporte para paginación.")
-    @ApiResponse(responseCode = "200", description = "Lista de historial de cálculos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de historial de cálculos"),
+            @ApiResponse(responseCode = "503", description = "Servicio externo y cache no disponible")
+    })
     @GetMapping("/history")
     public ResponseEntity<Page<CalculationHistoryDTO>> getCalculationHistory(
             @Parameter(description = "Información de paginación (page number, page size, sort)") Pageable pageable) {
