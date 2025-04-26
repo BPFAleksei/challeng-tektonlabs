@@ -48,6 +48,3 @@ Esta aplicación Spring Boot proporciona una API REST para sumar dos números y 
 * La base de datos PostgreSQL estará accesible en `localhost:5432` con las credenciales definidas en el archivo `docker-compose.yml` (`admin`, `admin` y la base de datos `calculadora_db`).
 * Los datos de la base de datos se persistirán en el volumen Docker llamado `percent_db`.
 * El servicio de porcentaje adicional está mockeado y devuelve un valor fijo del 10%. En una aplicación real, este servicio se conectaría a un sistema externo.
-
-¡Espero que esta guía detallada te sea de gran ayuda! Si tienes alguna otra pregunta, no dudes en consultarme.
->>>>>>> 85d11ef (Create README.md)
