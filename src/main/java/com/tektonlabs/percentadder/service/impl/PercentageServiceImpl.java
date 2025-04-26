@@ -21,6 +21,13 @@ import org.springframework.web.client.RestTemplate;
 @CacheConfig(cacheNames = "percentage")
 @Setter
 public class PercentageServiceImpl implements PercentageService {
+    private static final int MINUTES_IN_HOUR = 60;
+    private static final int SECONDS_IN_MINUTE = 60;
+    private static final int MILLISECONDS_IN_SECOND = 1000;
+
+    private static final long THIRTY_MINUTES_IN_MILLISECONDS = 30 * MINUTES_IN_HOUR * SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
+
+
     @Value("${external.percentage.url}")
     private String percentageServiceUrl;
 
@@ -58,7 +65,7 @@ public class PercentageServiceImpl implements PercentageService {
         }
     }
 
-    @Scheduled(fixedRate = 30 * 60 * 1000) // Evict cache every 30 minutes
+    @Scheduled(fixedRate = THIRTY_MINUTES_IN_MILLISECONDS)
     @CacheEvict
     private void clearPercentageCache() {
         log.info("Clearing percentage cache.");

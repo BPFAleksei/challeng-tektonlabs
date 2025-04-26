@@ -21,6 +21,8 @@ import java.util.Map;
 @Service
 @Slf4j
 public class CalculationServiceImpl implements CalculationService {
+    private static final double BASE_PERCENTAGE = 100.0;
+
     private final PercentageService percentageService;
     private final CalculationHistoryRepository calculationHistoryRepository;
 
@@ -32,7 +34,7 @@ public class CalculationServiceImpl implements CalculationService {
     public double sumAndApplyPercentage(CalculationRequest request) {
         double sum = request.getNumber1() + request.getNumber2();
         double percentage = percentageService.getPercentage();
-        double result = sum * (1 + (percentage / 100.0));
+        double result = sum * (1 + (percentage / BASE_PERCENTAGE));
         recordCalculation(String.format("/api/calculate/sum?number1=%s&number2=%s", request.getNumber1(), request.getNumber2()), Map.of("number1", String.valueOf(request.getNumber1()), "number2", String.valueOf(request.getNumber2())), String.valueOf(result), null);
         return result;
     }
