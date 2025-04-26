@@ -32,7 +32,7 @@ public class CalculatorController {
             description = "Este endpoint permite obtener el historial de las llamadas al endpoint de suma, con soporte para paginación.")
     @ApiResponse(responseCode = "200", description = "Lista de historial de cálculos")
     @GetMapping("/history")
-    public ResponseEntity<org.springframework.data.domain.Page<CalculationHistoryDTO>> getCalculationHistory(
+    public ResponseEntity<Page<CalculationHistoryDTO>> getCalculationHistory(
             @Parameter(description = "Información de paginación (page number, page size, sort)") Pageable pageable) {
         Page<CalculationHistoryDTO> historyPage = calculationService.getCalculationHistory(pageable);
         return ResponseEntity.ok(historyPage);
